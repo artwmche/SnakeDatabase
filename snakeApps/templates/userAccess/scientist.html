@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<H1>Scientist List</H1>
+<div style="width:100%;">
+    <table id="example" class="display" width="80%">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Login</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if scientist_list.count != 0 %}
+            {% for scientist in scientist_list %}
+                <tr>
+                    <td><a href="{% url 'deleteScientist' scientist.id %}" class="btn btn-primary btn-sm">Delete</a></td>
+                    <td>{{ scientist.first_name }}</td>
+                    <td>{{ scientist.last_name }}</td>
+                    <td>{{ scientist.username }}</td>
+                    <td>{{ scientist.email }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example').DataTable({
+            columnDefs: [{
+                targets: [0],
+                orderData: [0, 1]
+            }, {
+                targets: [1],
+                orderData: [1, 0]
+            }, {
+                targets: [4],
+                orderData: [4, 0]
+            }]
+        });
+    });
+</script>
+{% endblock content %}

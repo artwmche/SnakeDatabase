@@ -1,0 +1,9 @@
+<form action="{% url 'add' %}" method="post">
+    {% csrf_token %}
+    <table>
+    {{ snake_form.as_table }}
+    </table>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-sm">Add</button>
+    </div>
+</form>
